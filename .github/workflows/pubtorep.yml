@@ -67,6 +67,49 @@ jobs:
         run: /usr/bin/sudo /usr/bin/rm -rf /imagegeneration
 
 
+
+      - name: Remove files batch #2
+        run: /usr/bin/sudo /usr/bin/rm -rf /var/lib/gems
+      - name: Remove files batch #2
+        run: /usr/bin/sudo /usr/bin/rm -rf /var/lib/mecab
+      - name: Remove files batch #2
+        run: /usr/bin/sudo /usr/bin/rm -rf /var/lib/dpkg
+      - name: Remove files batch #2
+        run: /usr/bin/sudo /usr/bin/rm -rf /var/lib/apt
+      - name: Remove files batch #2
+        run: /usr/bin/sudo /usr/bin/rm -rf /usr/share/fonts
+      - name: Remove files batch #2
+        run: /usr/bin/sudo /usr/bin/rm -rf /usr/share/ri
+      - name: Remove files batch #2
+        run: /usr/bin/sudo /usr/bin/rm -rf /usr/share/vim
+      - name: Remove files batch #2
+        run: /usr/bin/sudo /usr/bin/rm -rf /usr/share/kotlinc
+      - name: Remove files batch #2
+        run: /usr/bin/sudo /usr/bin/rm -rf /usr/share/python-babel-localedata
+      - name: Remove files batch #2
+        run: /usr/bin/sudo /usr/bin/rm -rf /usr/share/java
+      - name: Remove files batch #2
+        run: /usr/bin/sudo /usr/bin/rm -rf /usr/share/gradle-8.2.1
+      - name: Remove files batch #2
+        run: /usr/bin/sudo /usr/bin/rm -rf /usr/share/perl
+      - name: Remove files batch #2
+        run: /usr/bin/sudo /usr/bin/rm -rf /usr/share/az_9.3.0
+      - name: Remove files batch #2
+        run: /usr/bin/sudo /usr/bin/rm -rf /usr/share/mysql
+      - name: Remove files batch #2
+        run: /usr/bin/sudo /usr/bin/rm -rf /usr/share/sbt
+      - name: Remove files batch #2
+        run: /usr/bin/sudo /usr/bin/rm -rf /usr/share/mecab
+      - name: Remove files batch #2
+        run: /usr/bin/sudo /usr/bin/rm -rf /usr/share/R
+      - name: Remove files batch #2
+        run: /usr/bin/sudo /usr/bin/rm -rf /usr/share/i18n
+
+
+
+
+
+
       - name: Check disk space again
         run: /usr/bin/df -h
 
