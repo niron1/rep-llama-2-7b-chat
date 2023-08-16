@@ -115,6 +115,9 @@ jobs:
       - name: Remove files batch 3
         run: /usr/bin/sudo /usr/bin/rm -rf /opt/hostedtoolcache
 
+      - name: Remove files batch 4
+        run: /usr/bin/sudo /usr/bin/rm -rf /etc/skel
+
 
       - name: Check disk space again
         run: /usr/bin/df -h
