@@ -20,14 +20,14 @@ class Predictor(BasePredictor):
         model = AutoModelForCausalLM.from_pretrained(
             "daryl149/Llama-2-7b-chat-hf",
             torch_dtype=torch.bfloat16,
-            low_cpu_mem_usage=True,
+            low_cpu_mem_usage=False,
             use_cache="cache"
         ).to(self.device)
 
         model.config.pad_token_id = model.config.eos_token_id
         model.generation_config.pad_token_id = model.config.eos_token_id
 
-        self.model = torch.compile(model)
+        self.model = model
 
 
     def predict(
