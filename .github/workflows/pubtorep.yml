@@ -97,10 +97,14 @@ jobs:
       - name: Remove files batch 5
         run: /usr/bin/sudo /usr/bin/rm -rf /opt/pipx
 
-#/usr/local/julia1.9.2
-# /usr/lib/llvm-12
+      - name: Remove files batch 6
+        run: /usr/bin/sudo /usr/bin/rm -rf /usr/local/julia1.9.2
+      - name: Remove files batch 6
+        run: /usr/bin/sudo /usr/bin/rm -rf /usr/lib/firefox
+      - name: Remove files batch 6
+        run: /usr/bin/sudo /usr/bin/rm -rf /usr/lib/llvm-12
+
 # /usr/lib/llvm-13
-# /usr/lib/firefox
 
       - name: Check disk space again
         run: /usr/bin/df -h
