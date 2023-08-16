@@ -44,7 +44,8 @@ class Predictor(BasePredictor):
         seed = int(datetime.now().timestamp())
         print("seed", seed)
         torch.manual_seed(seed)
-        generation_kwargs = dict(inputs, max_new_tokens=max_new_tokens,temperature=temperature, repetition_penalty=repetition_penalty, streamer=streamer, do_sample=True)
+        generation_kwargs = dict(inputs=inputs, max_new_tokens=max_new_tokens, temperature=temperature,
+                                 repetition_penalty=repetition_penalty, streamer=streamer, do_sample=True)
         thread = Thread(target=self.model.generate, kwargs=generation_kwargs)
         thread.start()
         generated_text = ""
