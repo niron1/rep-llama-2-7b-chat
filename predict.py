@@ -45,5 +45,6 @@ class Predictor(BasePredictor):
         torch.manual_seed(seed)
         outputs = self.model.generate(inputs, max_new_tokens=max_new_tokens,temperature=temperature, repetition_penalty=repetition_penalty, streamer=streamer, do_sample=True)
         output = self.tokenizer.decode(outputs[0])
-        output = re.sub(r'<s>|</s>', '', output)
-        return output.strip()
+        no_padding = re.sub(r'<s> |</s>', '', output)
+        unique_output = no_padding[len(prompt):]
+        return unique_output.strip()
