@@ -46,4 +46,4 @@ class Predictor(BasePredictor):
         outputs = self.model.generate(inputs, max_new_tokens=max_new_tokens,temperature=temperature, repetition_penalty=repetition_penalty, streamer=streamer, do_sample=True)
         output = self.tokenizer.decode(outputs[0])
         output = re.sub(r'<s>|</s>', '', output)
-        return output
+        return output.strip()
