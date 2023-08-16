@@ -2,7 +2,7 @@ name: Push to Replicate
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
   build:
