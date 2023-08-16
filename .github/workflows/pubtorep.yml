@@ -40,30 +40,6 @@ jobs:
       - name: Remove files batch 1
         run: /usr/bin/sudo /usr/bin/rm -rf   /var/log
       - name: Remove files batch 1
-        run: /usr/bin/sudo /usr/bin/rm -rf  /imagegeneration/installers/go-1.18.10-linux-x64.tar.gz
-      - name: Remove files batch 1
-        run: /usr/bin/sudo /usr/bin/rm -rf  /imagegeneration/installers/go-1.19.12-linux-x64.tar.gz
-      - name: Remove files batch 1
-        run: /usr/bin/sudo /usr/bin/rm -rf  /imagegeneration/installers/python-3.9.17-linux-22.04-x64.tar.gz
-      - name: Remove files batch 1
-        run: /usr/bin/sudo /usr/bin/rm -rf  /imagegeneration/installers/go-1.20.7-linux-x64.tar.gz
-      - name: Remove files batch 1
-        run: /usr/bin/sudo /usr/bin/rm -rf  /imagegeneration/installers/node-14.21.3-linux-x64.tar.gz
-      - name: Remove files batch 1
-        run: /usr/bin/sudo /usr/bin/rm -rf  /imagegeneration/installers/python-3.8.17-linux-22.04-x64.tar.gz
-      - name: Remove files batch 1
-        run: /usr/bin/sudo /usr/bin/rm -rf  /imagegeneration/installers/node-16.20.1-linux-x64.tar.gz
-      - name: Remove files batch 1
-        run: /usr/bin/sudo /usr/bin/rm -rf  /imagegeneration/installers/python-3.7.17-linux-22.04-x64.tar.gz
-      - name: Remove files batch 1
-        run: /usr/bin/sudo /usr/bin/rm -rf  /imagegeneration/installers/python-3.10.12-linux-22.04-x64.tar.gz
-      - name: Remove files batch 1
-        run: /usr/bin/sudo /usr/bin/rm -rf  /imagegeneration/installers/node-18.17.0-linux-x64.tar.gz
-      - name: Remove files batch 1
-        run: /usr/bin/sudo /usr/bin/rm -rf  /imagegeneration/installers/python-3.11.4-linux-22.04-x64.tar.gz
-      - name: Remove files batch 1
-        run: /usr/bin/sudo /usr/bin/rm -rf /imagegeneration/installers
-      - name: Remove files batch 1
         run: /usr/bin/sudo /usr/bin/rm -rf /imagegeneration
 
 
@@ -117,6 +93,9 @@ jobs:
 
       - name: Remove files batch 4
         run: /usr/bin/sudo /usr/bin/rm -rf /etc/skel
+
+      - name: Remove files batch 5
+        run: /usr/bin/sudo /usr/bin/rm -rf /opt/pipx
 
 
       - name: Check disk space again
