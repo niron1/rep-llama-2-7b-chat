@@ -15,7 +15,7 @@ jobs:
         run: /usr/bin/df -h
 
       - name: Check big folders as candidate for deletion
-        run: /usr/bin/du -BM --max-depth=1 / 2>&1 | awk '$1+0 >= 10 {print}'
+        run: /usr/bin/du -BM --max-depth=3 / 2>&1 | awk '$1+0 >= 10 {print}'
 
       - name: Erase apt lists
         run: /usr/bin/sudo /usr/bin/rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
