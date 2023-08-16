@@ -51,7 +51,7 @@ class Predictor(BasePredictor):
         generated_text = ""
         for new_text in streamer:
             generated_text += new_text
-            yield generated_text
+            yield new_text
 
         # output = self.tokenizer.decode(outputs[0])
         # no_padding = re.sub(r'<s> |</s>', '', output)
