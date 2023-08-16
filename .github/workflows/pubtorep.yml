@@ -18,13 +18,13 @@ jobs:
         run: /usr/bin/du -BM --max-depth=1 / 2>&1 | awk '$1+0 >= 10 {print}'
 
       - name: Erase apt lists
-        run: /usr/bin/rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+        run: /usr/bin/sudo /usr/bin/rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
       - name: Erase docs
-        run: /usr/bin/rm -rf /usr/share/doc/* /usr/share/man/* /usr/share/locale/*
+        run: /usr/bin/sudo /usr/bin/rm -rf /usr/share/doc/* /usr/share/man/* /usr/share/locale/*
 
       - name: Remove unnecesary packages
-        run: /usr/bin/apt-get autoremove -y && /usr/bin/apt-get clean
+        run: /usr/bin/sudo /usr/bin/apt-get autoremove -y && /usr/bin/apt-get clean
 
       - name: Setup Cog
         uses: replicate/setup-cog@v1.0.0
