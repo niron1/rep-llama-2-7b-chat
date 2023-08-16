@@ -24,7 +24,7 @@ jobs:
         run: /usr/bin/sudo /usr/bin/rm -rf /usr/share/doc/* /usr/share/man/* /usr/share/locale/*
 
       - name: Remove unnecesary packages
-        run: /usr/bin/sudo /usr/bin/apt-get autoremove -y && /usr/bin/apt-get clean
+        run: /usr/bin/sudo /usr/bin/apt-get autoremove -y && /usr/bin/sudo /usr/bin/apt-get clean
 
       - name: Setup Cog
         uses: replicate/setup-cog@v1.0.0
