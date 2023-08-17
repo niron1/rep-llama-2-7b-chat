@@ -35,7 +35,8 @@ class Predictor(BasePredictor):
         seed: int = Input(description="random number seed, -1=generate", default=-1),
         repetition_penalty: float = Input(description="repetition_penalty", default=1.1),
     ) -> ConcatenateIterator[str]:
-        inputs = self.tokenizer.encode(prompt, return_tensors="pt").to(self.device)
+        tprompt = prompt.strip()
+        inputs = self.tokenizer.encode(tprompt, return_tensors="pt").to(self.device)
 
         streamer = TextIteratorStreamer(self.tokenizer)
         if seed == -1:
@@ -47,9 +48,9 @@ class Predictor(BasePredictor):
                                  repetition_penalty=repetition_penalty, streamer=streamer, do_sample=True)
         thread = Thread(target=self.model.generate, kwargs=generation_kwargs)
         thread.start()
-        counter = len(prompt)
+        counter = len(tprompt)
         prompt_still_running = True
-        for new_text in stream_search(['<s> ','</s>'],streamer):
+        for new_text in stream_search(['<s>','</s>'],streamer):
             if prompt_still_running:
                 counter -= len(new_text)
                 if counter <= 0:

@@ -42,7 +42,7 @@ class DefeatInitialSpaces:
 
 
 def stream_search(needles, streamer):
-    un_spacer =  DefeatInitialSpaces()
+    un_spacer = DefeatInitialSpaces()
     stream_tag_remover = StreamTagRemover(needles)
     for chunk in streamer:
         for tok in stream_tag_remover.process_chunk(chunk):
