@@ -5,7 +5,7 @@
 from cog import BasePredictor, Input, ConcatenateIterator
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, TextIteratorStreamer
-import re
+from stream_search import stream_search
 from datetime import datetime
 from threading import Thread
 
@@ -54,9 +54,8 @@ class Predictor(BasePredictor):
                                  repetition_penalty=repetition_penalty, streamer=streamer, do_sample=True)
         thread = Thread(target=self.model.generate, kwargs=generation_kwargs)
         thread.start()
-        generated_text = ""
-        for new_text in streamer:
-            generated_text += new_text
+
+        for new_text in stream_search(['<s>','</s>'],streamer):
             yield new_text
 
         # output = self.tokenizer.decode(outputs[0])
