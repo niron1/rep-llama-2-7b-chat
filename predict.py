@@ -24,9 +24,6 @@ class Predictor(BasePredictor):
             use_cache="cache"
         ).to(self.device)
 
-        # model.config.pad_token_id = model.config.eos_token_id
-        # model.generation_config.pad_token_id = model.config.eos_token_id
-
         self.model = model
 
 
@@ -45,20 +42,19 @@ class Predictor(BasePredictor):
             seed = int(datetime.now().timestamp())
         print("seed", seed)
 
-        print("model config eos_token_id", self.model.config.eos_token_id)
-        print("model config pad_token_id", self.model.config.pad_token_id)
-        print("model generation config pad_token_id", self.model.generation_config.pad_token_id)
-
         torch.manual_seed(seed)
         generation_kwargs = dict(inputs=inputs, max_new_tokens=max_new_tokens, temperature=temperature,
                                  repetition_penalty=repetition_penalty, streamer=streamer, do_sample=True)
         thread = Thread(target=self.model.generate, kwargs=generation_kwargs)
         thread.start()
-
+        counter = len(prompt)
+        prompt_still_running = True
         for new_text in stream_search(['<s> ','</s>'],streamer):
-            yield new_text
-
-        # output = self.tokenizer.decode(outputs[0])
-        # no_padding = re.sub(r'<s> |</s>', '', output)
-        # unique_output = no_padding[len(prompt):]
-        # return unique_output.strip()
+            if prompt_still_running:
+                counter -= len(new_text)
+                if counter <= 0:
+                    if counter < 0:
+                        yield new_text[counter:]
+                    prompt_still_running=False
+            else:
+                yield new_text
