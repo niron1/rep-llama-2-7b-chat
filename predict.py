@@ -24,9 +24,8 @@ class Predictor(BasePredictor):
             use_cache="cache"
         ).to(self.device)
 
-        model.config.pad_token_id = model.config.eos_token_id
-        model.generation_config.pad_token_id = model.config.eos_token_id
-        print("eos_token_id", model.config.eos_token_id)
+        # model.config.pad_token_id = model.config.eos_token_id
+        # model.generation_config.pad_token_id = model.config.eos_token_id
 
         self.model = model
 
@@ -34,15 +33,22 @@ class Predictor(BasePredictor):
     def predict(
         self,
         prompt: str = Input(description="prompt", default="Can ducks fly?"),
-        max_new_tokens: int = Input(description="max_new_tokens", default=1000 ),
-        temperature: float = Input(description="temperature", default=0.9 ),
+        max_new_tokens: int = Input(description="max_new_tokens", default=1000),
+        temperature: float = Input(description="temperature", default=0.9),
+        seed: int = Input(description="random number seed, -1=generate", default=-1),
         repetition_penalty: float = Input(description="repetition_penalty", default=1.1),
     ) -> ConcatenateIterator[str]:
         inputs = self.tokenizer.encode(prompt, return_tensors="pt").to(self.device)
 
         streamer = TextIteratorStreamer(self.tokenizer)
-        seed = int(datetime.now().timestamp())
+        if seed == -1:
+            seed = int(datetime.now().timestamp())
         print("seed", seed)
+
+        print("model config eos_token_id", self.model.config.eos_token_id)
+        print("model config pad_token_id", self.model.config.pad_token_id)
+        print("model generation config pad_token_id", self.model.generation_config.pad_token_id)
+
         torch.manual_seed(seed)
         generation_kwargs = dict(inputs=inputs, max_new_tokens=max_new_tokens, temperature=temperature,
                                  repetition_penalty=repetition_penalty, streamer=streamer, do_sample=True)
