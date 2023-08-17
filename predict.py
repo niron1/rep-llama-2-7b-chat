@@ -56,7 +56,8 @@ class Predictor(BasePredictor):
                 if counter <= 0:
                     if counter < 0:
                         print ("1111",new_text[counter:],"1111")
-                        yield new_text[counter:]
+                        ## remove extra spaces which llm created after the prompt
+                        yield new_text[counter:].lstrip()
                     prompt_still_running=False
             else:
                 print ("2222", new_text,"2222")
