@@ -27,19 +27,31 @@ class StreamTagRemover:
 
 # chunks = ["<s>","This is","<s",">"," an interesting line ","</","s>","with so many</s> letters","</s>"]
 
+class DefeatInitialSpaces:
+    def __init__(self):
+        self.state = {'on_train': False}
+
+    def process(self, s):
+        if not self.state['on_train']:
+            stripped_s = s.lstrip()
+            if stripped_s:
+                self.state['on_train'] = True
+            return stripped_s
+        else:
+            return s
+
 
 def stream_search(needles, streamer):
+    un_spacer =  DefeatInitialSpaces()
     stream_tag_remover = StreamTagRemover(needles)
     for chunk in streamer:
         for tok in stream_tag_remover.process_chunk(chunk):
-            if tok != '':
-                yield tok
+            tok1 = un_spacer.process(tok)
+            if tok1 != '':
+                yield tok1
     for tok in stream_tag_remover.finish():
-        if tok != '':
-            yield tok
-
-# for new_text in stream_search():
-#     print("llm says:",f'[{new_text}]')
-
+        tok1 = un_spacer.process(tok)
+        if tok1 != '':
+            yield tok1
 
 
