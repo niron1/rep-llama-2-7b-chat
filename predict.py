@@ -55,7 +55,7 @@ class Predictor(BasePredictor):
         thread = Thread(target=self.model.generate, kwargs=generation_kwargs)
         thread.start()
 
-        for new_text in stream_search(['<s>','</s>'],streamer):
+        for new_text in stream_search(['<s> ','</s>'],streamer):
             yield new_text
 
         # output = self.tokenizer.decode(outputs[0])
