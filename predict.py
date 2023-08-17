@@ -55,7 +55,9 @@ class Predictor(BasePredictor):
                 counter -= len(new_text)
                 if counter <= 0:
                     if counter < 0:
+                        print ("1111",new_text[counter:],"1111")
                         yield new_text[counter:]
                     prompt_still_running=False
             else:
+                print ("2222", new_text,"2222")
                 yield new_text

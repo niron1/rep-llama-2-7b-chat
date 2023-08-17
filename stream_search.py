@@ -48,10 +48,12 @@ def stream_search(needles, streamer):
         for tok in stream_tag_remover.process_chunk(chunk):
             tok1 = un_spacer.process(tok)
             if tok1 != '':
+                print("33333",tok1,"33333")
                 yield tok1
     for tok in stream_tag_remover.finish():
         tok1 = un_spacer.process(tok)
         if tok1 != '':
+            print("44444",tok1,"444444")
             yield tok1
 
 
