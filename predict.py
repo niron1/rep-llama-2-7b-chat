@@ -35,8 +35,8 @@ class Predictor(BasePredictor):
         seed: int = Input(description="random number seed, -1=generate", default=-1),
         repetition_penalty: float = Input(description="repetition_penalty", default=1.1),
     ) -> ConcatenateIterator[str]:
-        tprompt = prompt.strip()
-        inputs = self.tokenizer.encode(tprompt, return_tensors="pt").to(self.device)
+        trimmed_prompt = prompt.strip()
+        inputs = self.tokenizer.encode(trimmed_prompt, return_tensors="pt").to(self.device)
 
         streamer = TextIteratorStreamer(self.tokenizer)
         if seed == -1:
@@ -48,17 +48,15 @@ class Predictor(BasePredictor):
                                  repetition_penalty=repetition_penalty, streamer=streamer, do_sample=True)
         thread = Thread(target=self.model.generate, kwargs=generation_kwargs)
         thread.start()
-        counter = len(tprompt)
+        counter = len(trimmed_prompt)
         prompt_still_running = True
         for new_text in stream_search(['<s>','</s>'],streamer):
             if prompt_still_running:
                 counter -= len(new_text)
                 if counter <= 0:
                     if counter < 0:
-                        print ("1111",new_text[counter:],"1111")
                         ## remove extra spaces which llm created after the prompt
                         yield new_text[counter:].lstrip()
                     prompt_still_running=False
             else:
-                print ("2222", new_text,"2222")
                 yield new_text

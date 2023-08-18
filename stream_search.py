@@ -25,8 +25,6 @@ class StreamTagRemover:
         self.result += valid_piece
         return self.result
 
-# chunks = ["<s>","This is","<s",">"," an interesting line ","</","s>","with so many</s> letters","</s>"]
-
 class DefeatInitialSpaces:
     def __init__(self):
         self.state = {'on_train': False}
@@ -42,18 +40,16 @@ class DefeatInitialSpaces:
 
 
 def stream_search(needles, streamer):
-    un_spacer = DefeatInitialSpaces()
+    defeat_initial_spaces = DefeatInitialSpaces()
     stream_tag_remover = StreamTagRemover(needles)
     for chunk in streamer:
         for tok in stream_tag_remover.process_chunk(chunk):
-            tok1 = un_spacer.process(tok)
+            tok1 = defeat_initial_spaces.process(tok)
             if tok1 != '':
-                print("33333",tok1,"33333")
                 yield tok1
     for tok in stream_tag_remover.finish():
-        tok1 = un_spacer.process(tok)
+        tok1 = defeat_initial_spaces.process(tok)
         if tok1 != '':
-            print("44444",tok1,"444444")
             yield tok1
 
 
