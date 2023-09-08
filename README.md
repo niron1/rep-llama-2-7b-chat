@@ -3,4 +3,4 @@ This is a version of LLAMA-2-7b Chat that I created based on a peripheral versio
 I made this to have a clean prompt assembly from the client and so that temperature will work correctly
 
 
-nirai@edev.one
+nirai [at] edev.one
